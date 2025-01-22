@@ -1,0 +1,19 @@
+{
+  "name": "megha-backend",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "@prisma/adapter-neon": "^6.2.1",
+    "@prisma/client": "^6.2.1",
+    "prisma": "^6.2.1",
+    "hono": "^4.6.17",
+    "superjson": "^2.2.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250109.0",
+    "wrangler": "^3.101.0"
+  }
+}

@@ -5,7 +5,7 @@ import { postRouter } from "./routers/post-router";
 
 export const app = new Hono().use(cors());
 
-app.get("/", (c) => c.text("Hello Cloudflare Workers!"));
+app.get("/", (c) => c.text("Hello From Megha Express"));
 const appRouter = app.route("/post", postRouter);
 
 export const httpHandler = handle(app);

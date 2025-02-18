@@ -1,17 +1,40 @@
 generator client {
   provider = "prisma-client-js"
 }
-
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  name      String
+enum UserRole {
+  SUPERADMIN
+  HUBADMIN
+  HUBMANAGER
+  USER
+}
+
+model User {
+  id       String   @id @unique
+  email    String   @unique
+  name     String
+  password String
+  role     UserRole @default(USER)
+  Hub      Hub[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
-  @@index([name])
+}
+
+model Hub {
+  id         String  @id @unique
+  name       String
+  address    String
+  zipcode    String
+  hubstatus  Boolean @default(false)
+  hubAdminId String
+  hubAdmin   User    @relation(fields: [hubAdminId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

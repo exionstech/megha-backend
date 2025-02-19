@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
@@ -26,15 +27,35 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model Hub {
-  id         String  @id @unique
-  name       String
-  address    String
-  zipcode    String
-  hubstatus  Boolean @default(false)
-  hubAdminId String
-  hubAdmin   User    @relation(fields: [hubAdminId], references: [id])
+enum KycDocuments {
+  AADHAR
+  PAN
+  DRIVING_LICENSE
+  VOTER_ID
+  PASSPORT
+}
 
+model Hub {
+  id          String       @id @unique
+  name        String
+  address     String
+  pincode     String
+  hubAdminId  String
+  hubAdmin    User         @relation(fields: [hubAdminId], references: [id])
+  kycstatus   Boolean      @default(false)
+  kycdoc      KycDocuments
+  kycdocurl   String
+  referencenos String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ReferenceNo {
+  id        String   @id @unique
+  prefix    String
+  start     String
+  end       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

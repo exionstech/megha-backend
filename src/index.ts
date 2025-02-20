@@ -3,7 +3,6 @@ import { cors } from 'hono/cors'
 import userRouter from './routers/user-router'
 import hubRouter from './routers/hub-router'
 import authRouter from './routers/auth-router'
-import { checkBearerAuth } from './middleware/middleware'
 import refRouter from './routers/reference-router'
 
 const app = new Hono().basePath('/api')

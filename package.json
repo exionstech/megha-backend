@@ -3,14 +3,17 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "postinstall": "prisma generate --no-engine"
+    "db:generate": "drizzle-kit generate:sqlite",
+    "db:up": "drizzle-kit up:sqlite"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.4.3",
+    "@libsql/client": "^0.5.6",
     "@neondatabase/serverless": "^0.10.4",
     "@prisma/adapter-neon": "^6.4.0",
     "@prisma/client": "^6.4.0",
     "@prisma/extension-accelerate": "^1.2.2",
+    "drizzle-orm": "^0.30.2",
     "hono": "^4.7.1",
     "prisma": "^6.4.0",
     "ws": "^8.18.0"
@@ -19,6 +22,7 @@
     "@cloudflare/workers-types": "^4.20250109.0",
     "@types/node": "^22.13.4",
     "@types/ws": "^8.5.14",
+    "drizzle-kit": "0.20.14",
     "wrangler": "^3.101.0"
   }
 }

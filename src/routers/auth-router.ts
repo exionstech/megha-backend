@@ -1,22 +1,22 @@
 import { Hono } from "hono";
 import { zValidator } from '@hono/zod-validator'
 import { authSchema } from "../schema";
-import { db } from "../../lib/db";
 import { sign } from 'hono/jwt'
 import { env } from 'hono/adapter'
+import { initDbConnect } from "../db";
+import { Environment } from "../binding";
+import { users } from "../db/schema";
+import { eq } from "drizzle-orm";
 
-const authRouter = new Hono();
-
+const authRouter = new Hono<Environment>();
 
 authRouter.post("/login", zValidator('json', authSchema), async (c) => {
     const { SECRET } = env<{ SECRET: string }>(c);
+    const db = initDbConnect(c.env.DB);
+    
     try {
         const { email, password } = c.req.valid('json')
-        const user = await db.user.findUnique({
-            where: {
-                email: email
-            }
-        })
+        const user = await db.select().from(users).where(eq(users.email, email)).get();
 
         if (!user) {
             return c.json({ message: "User not found", success: false });

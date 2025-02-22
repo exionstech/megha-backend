@@ -3,22 +3,17 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "generate": "drizzle-kit generate",
+    "db:up": "drizzle-kit up",
+    "amend": "drizzle-kit drop && drizzle-kit generate",
+    "studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.4.3",
     "@libsql/client": "^0.14.0",
-    "@neondatabase/serverless": "^0.10.4",
-    "@prisma/adapter-neon": "^6.4.0",
-    "@prisma/client": "^6.4.0",
-    "@prisma/extension-accelerate": "^1.2.2",
     "drizzle-orm": "^0.39.0",
-    "hono": "^4.7.1",
-    "prisma": "^6.4.0",
-    "ws": "^8.18.0"
+    "hono": "^4.7.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
